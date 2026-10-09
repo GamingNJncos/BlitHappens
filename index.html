@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BlitHappens - The Sprite Editor</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<div class="tab-bar">
+<button class="tab active" onclick="showTab('editor')">Editor</button>
+<button class="tab" onclick="showTab('settings')">Settings</button>
+</div>
+
+<div id="tab-editor">
+<h1>BlitHappens</h1>
+<p class="subtitle">The Sprite Editor</p>
+<div id="msg">Load a sprite sheet image to begin</div>
+<div class="toolbar">
+<div><label>Image</label><br><input type="file" id="fileIn" accept="image/*"></div>
+<div><label>Min sprite px</label><br><input type="number" id="minPx" value="16" min="4" max="200"></div>
+<div><label>BG tolerance</label><br><input type="number" id="bgTol" value="30" min="5" max="100"></div>
+<div><label>Frame delay ms</label><br><input type="number" id="delayMs" value="100" min="16" max="5000"></div>
+<div><button onclick="detect()">Re-Detect</button></div>
+</div>
+<div class="panels">
+<div class="panel" style="flex:2">
+<h2>Sprite Sheet</h2>
+<canvas id="sheetCanvas"></canvas>
+<div id="rowList"></div>
+</div>
+<div class="panel" style="flex:1">
+<h2>Preview (<span id="selCount">0</span> frames)</h2>
+<canvas id="previewCanvas" width="200" height="200"></canvas>
+<div class="toolbar" style="margin-top:8px">
+<div><label>Name</label><br><input type="text" id="animName" placeholder="my_animation"></div>
+</div>
+<div class="actions">
+<button class="grn" onclick="saveLocal()">Save File</button>
+<span class="device-only" style="display:none">
+<button onclick="uploadToDevice()">Upload to Device</button>
+</span>
+</div>
+<div class="actions" style="margin-top:4px">
+<button class="alt" onclick="selectAll()">Select All</button>
+<button class="alt" onclick="selectNone()">Select None</button>
+</div>
+<div class="card device-only" style="margin-top:8px;display:none">
+<h2 style="font-size:.9em">Load from Device</h2>
+<div class="actions">
+<button class="alt" onclick="listDeviceAnims()">Browse Device</button>
+</div>
+<div id="deviceAnims" style="max-height:200px;overflow-y:auto;margin-top:4px"></div>
+</div>
+</div>
+</div>
+<canvas id="workCanvas" style="display:none"></canvas>
+</div>
+
+<div id="tab-settings" style="display:none">
+<h1>BlitHappens</h1>
+<p class="subtitle">Settings</p>
+<div class="card">
+<h2>Device Support</h2>
+<div style="margin:8px 0">
+<label class="toggle-label">
+<input type="checkbox" id="trgbEnabled" onchange="saveSettings()">
+<span>Enable T-RGB Device</span>
+</label>
+<p style="font-size:.8em;color:#8b949e;margin:4px 0 0">When enabled, shows Upload to Device, Browse Device, and Load from Device features.</p>
+</div>
+<div id="trgbSettings" style="display:none;margin-top:12px">
+<div><label style="font-size:.85em;color:#8b949e">Device IP Address</label><br>
+<input type="text" id="settingsIp" value="" placeholder="192.168.x.x" style="background:#0d1117;color:#e6edf3;border:1px solid #30363d;border-radius:4px;padding:6px 10px;width:200px;margin-top:4px" onchange="saveSettings()">
+</div>
+<div style="margin-top:8px">
+<button class="alt" onclick="testConnection()">Test Connection</button>
+<span id="connStatus" style="margin-left:8px;font-size:.85em"></span>
+</div>
+</div>
+</div>
+</div>
+
+<footer>BlitHappens - The Sprite Editor</footer>
+<input type="hidden" id="deviceIp" value="">
+<script src="editor.js"></script>
+</body></html>
