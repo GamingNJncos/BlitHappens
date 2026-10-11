@@ -1,6 +1,6 @@
 # BlitHappens
 
-Browser-based sprite sheet editor. Load any sprite sheet image, auto-detect individual sprites, preview animations with per-frame timing, and export as binary or upload directly to a T-RGB device.
+Browser-based sprite sheet editor. Load any sprite sheet image, auto-detect individual sprites, preview animations with per-frame timing, and export as binary or upload directly to a T-RGB device (not required).
 
 No server required — open `index.html` in any modern browser.
 
